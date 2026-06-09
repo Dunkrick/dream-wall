@@ -1,0 +1,82 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f7fb;
+    padding: 40px;
+}
+
+.container {
+    max-width: 700px;
+    margin: 0 auto;
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.input-group {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+#dreamInput {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+#saveBtn {
+    padding: 12px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#message {
+    min-height: 24px;
+    margin-bottom: 16px;
+}
+
+#dreamList {
+    list-style: none;
+}
+
+#dreamList li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 12px;
+    margin-bottom: 10px;
+
+    border: 1px solid #eee;
+    border-radius: 8px;
+}
+
+#dreamList button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#saveBtn {
+    background-color: black;
+    color: white;
+}
+
+#dreamList button {
+    background-color: crimson;
+    color: white;
+}
