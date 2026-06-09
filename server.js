@@ -3,7 +3,7 @@ const db = require("./db");
 const path = require("path");
 
 const app = express();
-const PORT = 3003;
+const PORT = process.env.PORT || 3003;
 
 app.use(express.json());
 app.use(express.static("public"));
@@ -81,5 +81,5 @@ app.delete("/dreams/:id", (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });
