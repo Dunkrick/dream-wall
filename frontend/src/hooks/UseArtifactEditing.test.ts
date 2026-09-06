@@ -118,4 +118,66 @@ describe("useArtifactEditing", () => {
 
         expect(result.current.editText).toBe("Updated externally");
     });
+
+    it("saves when Enter is pressed", async () => {
+            const onUpdate = vi.fn().mockResolvedValue(undefined);
+            const onEditingChange = vi.fn();
+
+            const { result } = renderHook(() =>
+                useArtifactEditing({
+                    artifactId: 42,
+                initialText: "Original text",
+                isEditing: true,
+                onUpdate,
+                onEditingChange,
+            })
+        );
+
+        act(() => {
+            result.current.setEditText("Updated text");
+        });
+
+        await act(async () => {
+            await result.current.handleKeyDown({
+                key: "Enter",
+                preventDefault: vi.fn(),
+            } as unknown as React.KeyboardEvent<HTMLInputElement>);
+        });
+
+        expect(onUpdate).toHaveBeenCalledWith(42, {
+            text: "Updated text",
+        });
+
+        expect(onEditingChange).toHaveBeenCalledWith(false);
+    });
+
+    it("cancels when Escape is pressed", () => {
+        const onUpdate = vi.fn().mockResolvedValue(undefined);
+        const onEditingChange = vi.fn();
+
+        const { result } = renderHook(() =>
+            useArtifactEditing({
+                artifactId: 42,
+                initialText: "Original text",
+                isEditing: true,
+                onUpdate,
+                onEditingChange,
+            })
+        );
+
+        act(() => {
+            result.current.setEditText("Changed text");
+        });
+
+        act(() => {
+            result.current.handleKeyDown({
+                key: "Escape",
+                preventDefault: vi.fn(),
+            } as unknown as React.KeyboardEvent<HTMLInputElement>);
+        });
+
+        expect(result.current.editText).toBe("Original text");
+        expect(onUpdate).not.toHaveBeenCalled();
+        expect(onEditingChange).toHaveBeenCalledWith(false);
+    });
 });
